@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Newspaper Contact</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        body {
+            font-family: 'Old Standard TT', serif;
+            background-color: #f5f1e6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .newspaper {
+            width: 100%;
+            max-width: 700px;
+            background-color: rgba(255, 253, 245, 0.9);
+            padding: 40px;
+            border: 1px solid #d2b48c;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .newspaper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #8b0000, #d2b48c, #8b0000);
+        }
+
+        .newspaper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #8b0000, #d2b48c, #8b0000);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px double #8b0000;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: #8b0000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+
+        .header p {
+            font-style: italic;
+            margin: 5px 0 0;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #444;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d2b48c;
+            border-radius: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            font-family: 'Old Standard TT', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8b0000;
+            background-color: rgba(255, 253, 245, 0.9);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button {
+            background-color: #8b0000;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            font-family: 'Old Standard TT', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #6b0000;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        .error-message {
+            color: #8b0000;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-style: italic;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-message {
+            color: #006400;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 100, 0, 0.1);
+            border-left: 3px solid #006400;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .press-date {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .ornament {
+            text-align: center;
+            margin: 20px 0;
+            color: #8b0000;
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Vintage ink bleed effect */
+        .ink-bleed {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20 T80,20" stroke="%238b0000" fill="none" stroke-width="0.5" opacity="0.1"/></svg>');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .ink-bleed-1 {
+            top: 15%;
+            left: 5%;
+            transform: rotate(15deg);
+        }
+
+        .ink-bleed-2 {
+            bottom: 10%;
+            right: 5%;
+            transform: rotate(-10deg);
+        }
+
+        /* Typewriter effect for header */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #8b0000;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #8b0000; }
+        }
+
+        /* Vintage photo corners */
+        .photo-corners {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .photo-corners::before,
+        .photo-corners::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-style: solid;
+            border-color: #8b0000;
+            border-width: 0;
+        }
+
+        .photo-corners::before {
+            top: 0;
+            left: 0;
+            border-top-width: 3px;
+            border-left-width: 3px;
+        }
+
+        .photo-corners::after {
+            bottom: 0;
+            right: 0;
+            border-bottom-width: 3px;
+            border-right-width: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <div class="photo-corners"></div>
+        <div class="ink-bleed ink-bleed-1"></div>
+        <div class="ink-bleed ink-bleed-2"></div>
+        
+        <div class="press-date">EST. 1897 • DAILY EDITION • VOL. CXXIV, No. 42</div>
+        
+        <div class="header">
+            <h1><span class="typewriter">Contact The Chronicle</span></h1>
+            <p>"All the News That's Fit to Print"</p>
+        </div>
+        
+        <div class="ornament">✻ ✻ ✻</div>
+        
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Correspondent's Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name">
+                <div class="error-message" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Telegraph Address</label>
+                <input type="email" id="email" name="email" placeholder="Your modern electronic mail">
+                <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Dispatch Contents</label>
+                <textarea id="message" name="message" placeholder="Your important communiqué"></textarea>
+                <div class="error-message" id="messageError"></div>
+            </div>
+            
+            <div class="ornament">✻ ✻ ✻</div>
+            
+            <button type="submit">Send by Pneumatic Post</button>
+        </form>
+        
+        <div id="successMessage" class="success-message"></div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            clearErrors();
+            
+            const nameValid = validateName();
+            const emailValid = validateEmail();
+            const messageValid = validateMessage();
+            
+            if (nameValid && emailValid && messageValid) {
+                showSuccess();
+            }
+        });
+
+        function validateName() {
+            const nameInput = document.getElementById('name');
+            const nameError = document.getElementById('nameError');
+            
+            if (nameInput.value.trim() === '') {
+                nameError.textContent = 'This field requires your attention, good sir/madam';
+                nameInput.style.borderColor = '#8b0000';
+                nameInput.focus();
+                return false;
+            }
+            
+            nameInput.style.borderColor = '#006400';
+            return true;
+        }
+
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (emailInput.value.trim() === '') {
+                emailError.textContent = 'A telegraphic address is most necessary';
+                emailInput.style.borderColor = '#8b0000';
+                emailInput.focus();
+                return false;
+            }
+            
+            if (!emailRegex.test(emailInput.value)) {
+                emailError.textContent = 'This appears to be an invalid dispatch address';
+                emailInput.style.borderColor = '#8b0000';
+                emailInput.focus();
+                return false;
+            }
+            
+            emailInput.style.borderColor = '#006400';
+            return true;
+        }
+
+        function validateMessage() {
+            const messageInput = document.getElementById('message');
+            const messageError = document.getElementById('messageError');
+            
+            if (messageInput.value.trim() === '') {
+                messageError.textContent = 'Pray tell, what is your communication?';
+                messageInput.style.borderColor = '#8b0000';
+                messageInput.focus();
+                return false;
+            }
+            
+            messageInput.style.borderColor = '#006400';
+            return true;
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.textContent = '';
+            });
+            document.querySelectorAll('input, textarea').forEach(field => {
+                field.style.borderColor = '#d2b48c';
+            });
+        }
+
+        function showSuccess() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.innerHTML = '✔ <strong>Dispatch Received!</strong> Your communication has been safely delivered to our offices. Expect a reply via return post within three business days.';
+            successMessage.style.display = 'block';
+            
+            document.getElementById('contactForm').reset();
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 8000);
+        }
+
+        // Add vintage typing sound effect
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('keydown', function() {
+                // In a real implementation, you would play a typewriter sound here
+                console.log('Typewriter sound effect would play here');
+            });
+        });
+    </script>
+</body>
+</html>
